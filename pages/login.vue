@@ -103,8 +103,10 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       const str = JSON.stringify(this.form);
+
       axios.post("/api/public/register", { data: str }).then(response => {
         console.log(response);
+
         if (response.ok) this.regok = true;
       });
     },
