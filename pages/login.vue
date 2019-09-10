@@ -112,14 +112,12 @@ export default {
       evt.preventDefault();
       const str = JSON.stringify(this.login);
       axios.post("/api/public/login", { data: str }).then(response => {
-        console.log(response);
-        if (response.ok) this.regok = true;
-        /*const auth = {
-          accessToken:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJlbWFpbCI6InFxcSJ9.VA7mg02Hw1WmeKRVu69jF3Aq9BWQ0JfPa_1a4RwcNHg"
+        var answ = JSON.parse(response);
+        var auth = {
+          accessToken: answ.token
         };
         this.$store.commit("setAuth", auth);
-        Cookie.set("auth", auth);*/
+        Cookie.set("auth", auth);
       });
     }
   }
