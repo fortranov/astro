@@ -81,7 +81,7 @@ export default {
       evt.preventDefault();
       //alert(JSON.stringify(this.form));
       const str = JSON.stringify(this.form);
-      axios.post("/api/public/register",str).then(response => {
+      axios.post("/api/public/register", {data: str}).then(response => {
         if (response.ok) this.regok = true;
       });
     },
