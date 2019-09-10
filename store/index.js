@@ -13,8 +13,8 @@ const createStore = () => {
       }
     },
     actions: {
-      nuxtServerInit({ commit }, { req }) {
-        let auth = null;
+      nuxtServerInit({ commit }) {
+        /*let auth = null;
         if (req.headers.cookie) {
           const parsed = cookieparser.parse(req.headers.cookie);
           try {
@@ -23,7 +23,7 @@ const createStore = () => {
             //no valid cookie found
           }
         }
-        commit("setAuth", auth);
+        commit("setAuth", auth);*/
       }
     }
   });
