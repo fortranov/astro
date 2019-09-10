@@ -49,8 +49,27 @@
             </b-form>
           </b-tab>
           <b-tab title="Вход">
-            <h3>Login page</h3>
-            <button @click="postLogin">Вход</button>
+            <b-form @submit="postLogin">
+              <b-form-group id="input-group-6" label="Email:" label-for="input-6">
+                <b-form-input
+                  type="email"
+                  id="input-6"
+                  v-model="login.email"
+                  required
+                  placeholder="Введите имя"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group id="input-group-7" label="Пароль:" label-for="input-7">
+                <b-form-input
+                  type="password"
+                  id="input-7"
+                  v-model="login.pass"
+                  required
+                  placeholder="Введите имя"
+                ></b-form-input>
+              </b-form-group>
+              <b-button type="submit" variant="primary">Вход</b-button>
+            </b-form>
           </b-tab>
         </b-tabs>
       </div>
@@ -72,6 +91,10 @@ export default {
         pass: "",
         birth: ""
       },
+      login: {
+        email: "",
+        pass: ""
+      },
       regok: false
     };
   },
@@ -79,22 +102,27 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      //alert(JSON.stringify(this.form));
       const str = JSON.stringify(this.form);
-      axios.post("/api/public/register", {data: str}).then(response => {
+
+      axios.post("/api/public/register", { data: str }).then(response => {
+        console.log(response);
+
         if (response.ok) this.regok = true;
       });
     },
-    postLogin() {
-      setTimeout(() => {
-        const auth = {
+    postLogin(evt) {
+      evt.preventDefault();
+      const str = JSON.stringify(this.login);
+      axios.post("/api/public/login", { data: str }).then(response => {
+        console.log(response);
+        if (response.ok) this.regok = true;
+        /*const auth = {
           accessToken:
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJlbWFpbCI6InFxcSJ9.VA7mg02Hw1WmeKRVu69jF3Aq9BWQ0JfPa_1a4RwcNHg"
         };
         this.$store.commit("setAuth", auth);
-        Cookie.set("auth", auth);
-        //this.$router.push("/");
-      }, 1100);
+        Cookie.set("auth", auth);*/
+      });
     }
   }
 };
